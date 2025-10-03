@@ -37,7 +37,7 @@ class bitbucket(
 
   # Bitbucket 4.6.0 initialization configurations
   $display_name  = 'bitbucket',
-  $base_url      = "https://${::fqdn}",
+  $base_url      = "https://${trusted['certname']}",
   $license       = '',
   $sysadmin_username = 'admin',
   $sysadmin_password = 'bitbucket',
