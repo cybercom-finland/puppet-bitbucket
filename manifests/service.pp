@@ -21,16 +21,6 @@ class bitbucket::service  (
       mode    => $service_file_mode,
     }
 
-    
-    if ($::osfamily == 'RedHat' and $::operatingsystemmajrelease == '7') or ($::osfamily == 'Debian' and $::operatingsystemmajrelease == '16.04') {
-      exec { 'bitbucket_refresh_systemd':
-        command     => 'systemctl daemon-reload',
-        refreshonly => true,
-        subscribe   => File[$service_file_location],
-        before      => Service['bitbucket'],
-      }
-    }
-
     service { 'bitbucket':
       ensure  => $service_ensure,
       enable  => $service_enable,

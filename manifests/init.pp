@@ -104,11 +104,11 @@ class bitbucket(
 
   $webappdir    = "${installdir}/atlassian-${product}-${version}"
 
-  if $::bitbucket_version {
+  if $facts['bitbucket_version'] {
     # If the running version of bitbucket is less than the expected version of bitbucket
     # Shut it down in preparation for upgrade.
-    if $::bitbucket_version != '-1' and
-    versioncmp($version, $::bitbucket_version) > 0 {
+    if $facts['bitbucket_version'] != '-1' and
+    versioncmp($version, facts['bitbucket_version']) > 0 {
       notify { 'Attempting to upgrade bitbucket': }
       exec { $stop_bitbucket: }
       if versioncmp($version, '3.2.0') > 0 {
